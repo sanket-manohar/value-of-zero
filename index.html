@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>The Value of Zero</title>
+  <meta name="description" content="What is a zero digit really worth? Type any number and watch how its zeros change its value. Simple explanations of every rule, with examples, by Sanket Santosh Vidya Manohar.">
+  <meta name="author" content="Sanket Santosh Vidya Manohar">
+  <meta property="og:title" content="The Value of Zero">
+  <meta property="og:description" content="Type any number and see exactly how much its zeros are worth.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1f1f1f" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&display=block">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <button class="icon-btn only-mobile" id="menuBtn" aria-label="Open sections"><span class="ms">menu</span></button>
+    <a class="brand" href="#calculator" data-go="calculator">
+      <span class="logo" aria-hidden="true">0</span>
+      <span class="brand-text">The Value of Zero</span>
+    </a>
+    <nav class="links" aria-label="Links">
+      <a class="chip-btn primary" href="#paper" data-go="paper"><span class="ms">description</span><span>Read paper</span></a>
+      <a class="chip-btn" href="https://doi.org/10.5281/zenodo.23641598" target="_blank" rel="noopener"><span class="ms">link</span><span>DOI</span></a>
+      <a class="chip-btn" href="https://orcid.org/0009-0006-6912-3107" target="_blank" rel="noopener"><span class="orcid" aria-hidden="true">iD</span><span>ORCID</span></a>
+      <a class="chip-btn" href="https://sanketmanohar.com/" target="_blank" rel="noopener"><span class="ms">language</span><span>Website</span></a>
+    </nav>
+  </header>
+
+  <!-- Side panel -->
+  <aside class="sidenav" id="sidenav" aria-label="Sections">
+    <div class="sidenav-head only-mobile">
+      <span class="logo" aria-hidden="true">0</span><span>The Value of Zero</span>
+    </div>
+    <ul id="navList"></ul>
+    <div class="sidenav-links only-mobile">
+      <a href="https://doi.org/10.5281/zenodo.23641598" target="_blank" rel="noopener"><span class="ms">link</span>DOI</a>
+      <a href="https://orcid.org/0009-0006-6912-3107" target="_blank" rel="noopener"><span class="orcid" aria-hidden="true">iD</span>ORCID</a>
+      <a href="https://sanketmanohar.com/" target="_blank" rel="noopener"><span class="ms">language</span>Website</a>
+    </div>
+    <p class="sidenav-foot">By Sanket Santosh Vidya Manohar</p>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <main class="stage" id="stage">
+
+    <!-- 1. Calculator -->
+    <section class="panel" id="calculator" data-title="Calculator" data-icon="calculate">
+      <div class="panel-head">
+        <h1>What are the zeros in your number worth?</h1>
+        <p class="lead">Type any number. We remove its zeros and see how much smaller it gets. That difference is the value of the zeros.</p>
+      </div>
+      <div class="calc">
+        <div class="calc-left">
+          <form class="search" id="calcForm" autocomplete="off">
+            <span class="ms">search</span>
+            <input id="calcInput" inputmode="numeric" spellcheck="false" aria-label="Your number" value="2030" maxlength="40">
+            <button type="button" class="icon-btn small" id="calcClear" aria-label="Clear"><span class="ms">close</span></button>
+            <label class="base-pick" title="Number system">
+              <span class="sr">Base</span>
+              <select id="calcBase" aria-label="Number base">
+                <option value="10" selected>Base 10</option>
+                <option value="2">Base 2</option>
+                <option value="3">Base 3</option>
+                <option value="4">Base 4</option>
+                <option value="5">Base 5</option>
+                <option value="6">Base 6</option>
+                <option value="7">Base 7</option>
+                <option value="8">Base 8</option>
+                <option value="9">Base 9</option>
+                <option value="12">Base 12</option>
+                <option value="16">Base 16</option>
+              </select>
+            </label>
+          </form>
+          <div class="chips scroll-x" id="calcChips"></div>
+          <p class="calc-msg" id="calcMsg" role="status"></p>
+
+          <div class="card viz">
+            <div class="viz-row">
+              <div class="viz-label">Your number</div>
+              <div class="tiles" id="tilesN"></div>
+            </div>
+            <div class="viz-arrow"><span class="ms">arrow_downward</span><span>remove every zero</span></div>
+            <div class="viz-row">
+              <div class="viz-label">Without zeros</div>
+              <div class="tiles" id="tilesD"></div>
+            </div>
+            <p class="viz-note">The small blue tag under a digit shows how many places the zeros on its right push it up.</p>
+          </div>
+          <div class="card summary">
+            <div class="steps-head"><span class="ms">checklist</span><span>In three simple steps</span></div>
+            <ol class="summary-list" id="summaryList"></ol>
+          </div>
+        </div>
+
+        <div class="calc-right">
+          <div class="card result">
+            <div class="result-label">The zeros are worth</div>
+            <div class="result-big" id="resZ">2,007</div>
+            <div class="result-eq" id="resEq">2,030 − 23 = 2,007</div>
+            <div class="badges" id="resBadges"></div>
+          </div>
+          <div class="card steps">
+            <div class="steps-head">
+              <span class="ms">route</span>
+              <span>How it is calculated, digit by digit</span>
+            </div>
+            <ol class="steps-list" id="stepsList"></ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. The big idea -->
+    <section class="panel" id="idea" data-title="The big idea" data-icon="lightbulb">
+      <div class="panel-head">
+        <h1>Zero has two jobs</h1>
+        <p class="lead">Adding zero changes nothing. Writing zero next to a number changes a lot. Here is why.</p>
+      </div>
+      <div class="two-col">
+        <div class="card soft blue">
+          <div class="card-icon"><span class="ms">exposure_zero</span></div>
+          <h2>Zero as an amount</h2>
+          <p>As an amount, zero means <b>nothing</b>. Put 7 apples together with no apples and you still have 7. That is why <span class="mono">7 + 0 = 7</span>. Zero is the only number that never changes a sum.</p>
+        </div>
+        <div class="card soft orange">
+          <div class="card-icon"><span class="ms">pin</span></div>
+          <h2>Zero as a digit</h2>
+          <p>As a digit, zero <b>takes up a place</b>. Every digit on its left gets pushed one place higher, so it becomes 10 times bigger. That is why writing 0 after 1 gives <span class="mono">10</span>.</p>
+        </div>
+      </div>
+      <div class="card play">
+        <div class="play-head">
+          <h2>Try it: add versus write</h2>
+          <div class="chips" id="ideaStart"></div>
+        </div>
+        <div class="seg" id="ideaOps" role="tablist"></div>
+        <div class="play-out">
+          <div class="play-big" id="ideaBig"></div>
+          <p class="play-text" id="ideaText"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Definition -->
+    <section class="panel" id="definition" data-title="What we measure" data-icon="straighten">
+      <div class="panel-head">
+        <h1>How we measure the value of zero</h1>
+        <p class="lead">One simple, fair rule, so everyone gets the same answer.</p>
+      </div>
+      <div class="def-grid">
+        <div class="card def-main">
+          <div class="overline">The rule</div>
+          <div class="formula big">Value of zeros = <span class="hl-blue">your number</span> − <span class="hl-orange">your number with zeros removed</span></div>
+          <div class="def-example">
+            <div class="mini-tiles"><span>2</span><span class="z">0</span><span>3</span><span class="z">0</span></div>
+            <span class="ms">arrow_forward</span>
+            <div class="mini-tiles"><span>2</span><span>3</span></div>
+            <span class="def-math">2,030 − 23 = <b>2,007</b></span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="overline">A common trap: the number 101</div>
+          <p>It is tempting to say “101 is 1 + 100, so the zero turned 1 into 100, a change of 99”. But that removes a <b>1</b> as well as the 0, so it measures two changes at once.</p>
+          <p>Remove only the zero instead: 101 becomes 11. So the zero is worth <b>101 − 11 = 90</b>, not 99.</p>
+        </div>
+        <div class="card">
+          <div class="overline">One zero at a time</div>
+          <p>You can also ask what <b>one</b> zero is worth: remove just that zero and see how much the number drops. In 2,030, removing only the last zero gives 203, a drop of <b>1,827</b>.</p>
+          <p>The section <a href="#sharing" data-go="sharing">Sharing the credit</a> shows how to split the total fairly between zeros.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Rules (theorems) -->
+    <section class="panel" id="rules" data-title="The rules" data-icon="functions">
+      <div class="panel-head">
+        <h1>The rules, in plain words</h1>
+        <p class="lead">Each rule from the paper, what it means, and worked examples you can switch between.</p>
+      </div>
+      <div class="tabs scroll-x" id="ruleTabs" role="tablist"></div>
+      <div class="rule-body">
+        <div class="card rule-explain">
+          <div class="overline" id="ruleTag"></div>
+          <h2 id="ruleTitle"></h2>
+          <p class="rule-plain" id="rulePlain"></p>
+          <div class="formula" id="ruleFormula"></div>
+          <p class="rule-why" id="ruleWhy"></p>
+        </div>
+        <div class="card rule-try">
+          <div class="rule-try-head">
+            <span class="overline">Worked example</span>
+            <div class="chips" id="ruleChips"></div>
+          </div>
+          <div class="rule-work" id="ruleWork"></div>
+          <button class="text-btn" id="ruleOpen"><span class="ms">calculate</span>Open in calculator</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Sharing -->
+    <section class="panel" id="sharing" data-title="Sharing the credit" data-icon="pie_chart">
+      <div class="panel-head">
+        <h1>How much is each zero worth?</h1>
+        <p class="lead">Zeros help each other, so their single values add up to too much. Averaging over every order gives each zero a fair share.</p>
+      </div>
+      <div class="share">
+        <div class="card share-main">
+          <div class="share-top">
+            <div class="chips" id="shareChips"></div>
+          </div>
+          <div class="share-num" id="shareNum"></div>
+          <div class="share-table-wrap">
+            <table class="share-table" id="shareTable"></table>
+          </div>
+        </div>
+        <div class="card share-side">
+          <div class="overline">Why not just add them?</div>
+          <p>In 2,030, removing only the last zero drops the number by 1,827. Removing only the middle zero drops it by 1,800. Together that is 3,627, but all the zeros together are worth only <b>2,007</b>.</p>
+          <p>Each zero lifts the digits that the other zero also lifts, so they overlap.</p>
+          <div class="overline">The fair way</div>
+          <p>Put the zeros back one at a time, in every possible order, and give each zero the jump it causes. Average those jumps. This is called the <b>Shapley value</b>, from game theory. The shares always add up exactly to the total.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Decimals -->
+    <section class="panel" id="decimals" data-title="After the point" data-icon="decimal_increase">
+      <div class="panel-head">
+        <h1>Zeros after the decimal point</h1>
+        <p class="lead">Before the point, zeros make a number bigger. Right after the point, they make it smaller.</p>
+      </div>
+      <div class="dec">
+        <div class="card dec-main">
+          <div class="chips" id="decChips"></div>
+          <div class="dec-tiles" id="decTiles"></div>
+          <div class="dec-legend">
+            <span><i class="sw pos"></i>makes it bigger</span>
+            <span><i class="sw neg"></i>makes it smaller</span>
+            <span><i class="sw nil"></i>changes nothing</span>
+          </div>
+          <ul class="dec-list" id="decList"></ul>
+        </div>
+        <div class="card dec-side">
+          <div class="overline">The rule</div>
+          <p>A zero right after the point pushes every digit on its right one place <b>smaller</b>. So its value is negative:</p>
+          <div class="formula">value = −9 × (what is on its right)</div>
+          <p>In <span class="mono">0.05</span>, the part on the right of the zero is 0.05, so the zero is worth −9 × 0.05 = <b>−0.45</b>. Check: 0.05 − 0.5 = −0.45.</p>
+          <div class="overline">Zeros worth nothing</div>
+          <p>Zeros at the very front (<span class="mono">007</span>) or at the very end after the point (<span class="mono">2.50</span>) push nothing, so they are worth exactly 0.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Examples -->
+    <section class="panel" id="examples" data-title="Examples" data-icon="table_chart">
+      <div class="panel-head">
+        <h1>Examples and patterns</h1>
+        <p class="lead">Tap any row to open it in the calculator. Every value is a multiple of 9.</p>
+      </div>
+      <div class="seg small" id="exView" role="tablist">
+        <button class="on" data-v="table" role="tab">Table</button>
+        <button data-v="chart" role="tab">Chart</button>
+      </div>
+      <div class="ex-body">
+        <div class="card ex-table-card" id="exTableCard">
+          <table class="ex-table" id="exTable"></table>
+        </div>
+        <div class="card ex-chart-card" id="exChartCard" hidden>
+          <div class="chart-title">Value of the zeros for every number from 1 to 300</div>
+          <div class="chart-legend">
+            <span><i class="dot a"></i>ends in 0</span>
+            <span><i class="dot b"></i>zero only in the middle</span>
+          </div>
+          <div class="chart-wrap" id="chartWrap"></div>
+          <p class="chart-note">Numbers ending in 0 sit near 90% of the number. Numbers like 101 to 109 form flat steps: they are all worth 90, because only the digits left of the zero matter.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. History -->
+    <section class="panel" id="history" data-title="Story of zero" data-icon="history_edu">
+      <div class="panel-head">
+        <h1>A short story of zero</h1>
+        <p class="lead">Zero began as an empty-place mark and only later became a number of its own, in India.</p>
+      </div>
+      <ol class="timeline" id="timeline"></ol>
+    </section>
+
+    <!-- 9. Paper -->
+    <section class="panel" id="paper" data-title="Read the paper" data-icon="description">
+      <div class="paper-bar">
+        <div class="paper-title">
+          <h1>The Value of Zero: A Positional Measure of What a Zero Digit Contributes to a Number</h1>
+          <p>Sanket Santosh Vidya Manohar · Independent Researcher, Mumbai, India</p>
+        </div>
+        <div class="paper-actions">
+          <button class="icon-btn" id="zoomOut" aria-label="Zoom out"><span class="ms">zoom_out</span></button>
+          <button class="icon-btn" id="zoomIn" aria-label="Zoom in"><span class="ms">zoom_in</span></button>
+          <button class="chip-btn" id="citeBtn"><span class="ms">format_quote</span><span>Cite</span></button>
+          <a class="chip-btn" id="paperOpen" href="paper/value-of-zero-paper.pdf" target="_blank" rel="noopener"><span class="ms">open_in_new</span><span>Open</span></a>
+          <a class="chip-btn primary" id="paperDownload" href="paper/value-of-zero-paper.pdf" download><span class="ms">download</span><span>Download PDF</span></a>
+        </div>
+      </div>
+      <div class="paper-view card" id="paperView">
+        <div class="paper-status" id="paperStatus"><span class="spinner"></span>Loading the paper…</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pager">
+    <button class="icon-btn" id="prevBtn" aria-label="Previous section"><span class="ms">chevron_left</span></button>
+    <div class="dots" id="dots"></div>
+    <button class="icon-btn" id="nextBtn" aria-label="Next section"><span class="ms">chevron_right</span></button>
+  </footer>
+</div>
+
+<div class="dialog" id="citeDialog" hidden>
+  <div class="dialog-card" role="dialog" aria-modal="true" aria-labelledby="citeTitle">
+    <h2 id="citeTitle">Cite this paper</h2>
+    <pre id="citeText">Manohar, S. S. V. (2026). The Value of Zero: A Positional Measure of What a Zero Digit Contributes to a Number. Zenodo. https://doi.org/10.5281/zenodo.23641598</pre>
+    <div class="dialog-actions">
+      <button class="text-btn" id="citeClose">Close</button>
+      <button class="chip-btn primary" id="citeCopy"><span class="ms">content_copy</span><span>Copy</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
